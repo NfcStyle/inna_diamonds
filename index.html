@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NfcStyle</title>
+<link rel="icon" href="Logo.png">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600;700&display=swap');
+
+html, body {
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: #333;
+}
+
+/* Контейнер */
+#content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    padding: 36px 18px 18px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+    width: 90%;
+    max-width: 340px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Головний напис — напівжирний */
+.label-top {
+    font-size: 15px;        /* ~20% зменшено від 18px */
+    font-weight: 700;      /* напівжирний */
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* Блок банку (щільніше) */
+.bank-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;   /* трохи щільніше */
+}
+
+/* Логотип банку (загальний) */
+.bankLogo {
+    width: 45px;           /* загальний розмір логотипів */
+    margin-bottom: 10px;
+    display: block;
+    object-fit: contain;
+}
+
+/* Спеціально для PrivatBank — +10% */
+.privat-logo {
+    width: 50px;           /* збільшено на ~10% */
+}
+
+/* Номери карток — зменшені на ~20% */
+.nfcData {
+    font-size: 18px;       /* було 22px, тепер ~18px */
+    margin-bottom: 8px;
+    font-weight: 600;
+    word-break: break-all;
+}
+
+/* Кнопки — зменшені ~20% */
+.button {
+    font-size: 13px;       /* було 16px */
+    padding: 7px 14px;     /* трохи компактніше */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+    width: 150px;          /* було 180px */
+    height: 40px;          /* було 45px */
+    color: #fff;
+}
+
+/* Кольори кнопок */
+.privat { background-color: #00A859; }
+.ukrsib { background-color: #007A3D; }
+.mono   { background-color: #000000; }
+
+.button:hover {
+    transform: scale(1.06);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.18);
+}
+
+/* Контактний текст */
+#contact {
+    margin-top: 16px;
+    font-size: 13px;       /* зменшено з 16px */
+    text-align: center;
+}
+
+/* Іконки соцмереж */
+.social-icons {
+    margin-top: 8px;
+}
+
+.social-icons a { margin: 0 8px; display:inline-block; }
+.social-icons img {
+    width: 36px;           /* зменшено з 45px (~20%) */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+.social-icons img:hover { transform: scale(1.15); }
+
+/* Нижній блок — слоган, належність і логотип */
+#new-block {
+    font-size: 11px;       /* зменшено ~20% від 14px */
+    margin-top: 16px;
+    text-align: center;
+    color: #333;
+    min-height: 60px;      /* щоб блок завжди був видимим */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+#new-block b { font-weight: 700; font-size: 12px; }
+
+/* Логотип у нижньому блоці */
+#new-block-logo {
+    width: 45px;           /* залишено, як раніше */
+    display: block;
+}
+
+/* Спливаюче повідомлення */
+#customAlert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.45);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+#alertBox {
+    background: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    text-align: center;
+}
+#alertMessage {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Мобільна адаптивність */
+@media (max-width: 600px) {
+
+    #content {
+        margin-top: 18px;
+        padding: 24px 12px 12px;
+    }
+
+    .label-top { font-size: 14px; }
+    .nfcData { font-size: 16px; }
+    .button { font-size: 12px; width: 140px; height: 38px; }
+    #contact { font-size: 12px; }
+    .social-icons img { width: 34px; }
+    #new-block { font-size: 11px; }
+    #new-block-logo { width: 40px; }
+    .privat-logo { width: 44px; } /* трохи зменшити на дуже малих екранах */
+}
+
+@media (max-width: 400px) {
+    #content { padding: 18px 10px 10px; margin-top: 12px; }
+}
+</style>
+</head>
+<body>
+<div id="content">
+
+    <!-- Заголовок -->
+    <div class="label-top">Скопіюй номер картки</div>
+
+    <!-- PRIVATBANK -->
+    <div class="bank-block">
+        <!-- приват лого має додатковий клас privat-logo -->
+        <img class="bankLogo privat-logo" src="Privat.png" alt="PrivatBank Logo">
+        <div class="nfcData" id="privatData">4149609017148000</div>
+        <button class="button privat" onclick="copyCard('4149609017148000')">Копіювати</button>
+    </div>
+
+    <!-- UKRSIBBANK -->
+    <div class="bank-block">
+        <img class="bankLogo" src="Ukrsib.png" alt="UkrsibBank Logo">
+        <div class="nfcData" id="ukrsibData">5354323056110536</div>
+        <button class="button ukrsib" onclick="copyCard('5354323056110536')">Копіювати</button>
+    </div>
+
+    <!-- MONOBANK -->
+    <div class="bank-block">
+        <img class="bankLogo" src="Mono.png" alt="Monobank Logo">
+        <div class="nfcData" id="monoData">4441111131542478</div>
+        <button class="button mono" onclick="copyCard('4441111131542478')">Копіювати</button>
+    </div>
+
+    <!-- Контакти -->
+    <div id="contact">Хочеш таку мітку? Напиши нам:</div>
+    <div class="social-icons">
+        <a href="https://t.me/NfcStyleAdmin" target="_blank"><img src="telegram.png" alt="Telegram"></a>
+        <a href="viber://add?number=380973779192" target="_blank"><img src="viber.png" alt="Viber"></a>
+        <a href="https://www.instagram.com/nfcstylekr/" target="_blank"><img src="instagram.png" alt="Instagram"></a>
+        <a href="https://wa.me/380973779192" target="_blank"><img src="whatsapp.png" alt="WhatsApp"></a>
+    </div>
+
+    <!-- Нижній блок: належність, слоган і логотип -->
+    <div id="new-block">
+        <b>NfcStyleKR</b>
+        <div>NfcStyleKR допоможе зробити Ваш бізнес технологічно сучасним.</div>
+        <img id="new-block-logo" src="Logo.png" alt="NfcStyleKR Logo">
+    </div>
+
+</div>
+
+<!-- Спливаюче повідомлення -->
+<div id="customAlert">
+    <div id="alertBox">
+        <div id="alertMessage">Номер картки скопійовано</div>
+    </div>
+</div>
+
+<script>
+function copyCard(number) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(number)
+            .then(() => showAlert('Номер картки скопійовано'))
+            .catch(() => showAlert('Не вдалося скопіювати'));
+    } else {
+        // запасний варіант для старих браузерів
+        const el = document.createElement('textarea');
+        el.value = number;
+        document.body.appendChild(el);
+        el.select();
+        try { document.execCommand('copy'); showAlert('Номер картки скопійовано'); }
+        catch { showAlert('Не вдалося скопіювати'); }
+        document.body.removeChild(el);
+    }
+}
+
+function showAlert(message) {
+    const overlay = document.getElementById('customAlert');
+    document.getElementById('alertMessage').innerText = message;
+    overlay.style.display = 'flex';
+    setTimeout(() => overlay.style.display = 'none', 1600);
+}
+</script>
+</body>
+</html>
